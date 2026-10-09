@@ -1,0 +1,49 @@
+{
+  "existing": {
+    "rate": {
+      "RATE00": {
+        "base": "s32",
+        "date": "s33",
+        "id": "RATE00",
+        "quote": "s35",
+        "rate": 54
+      },
+      "RATE01": {
+        "base": "s64",
+        "date": "s65",
+        "id": "RATE01",
+        "quote": "s67",
+        "rate": 104
+      },
+      "RATE02": {
+        "base": "s96",
+        "date": "s97",
+        "id": "RATE02",
+        "quote": "s99",
+        "rate": 154
+      }
+    }
+  },
+  "new": {
+    "rate": {
+      "rate_ref01": {
+        "base": "sc8",
+        "date": "sc9",
+        "quote": "scb",
+        "rate": 204
+      }
+    }
+  },
+  "requests": {
+    "GET /rates": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /rate/{base}/{quote}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

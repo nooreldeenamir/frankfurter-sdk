@@ -1,0 +1,4 @@
+PASS pair load: {"date":"2026-10-09","base":"EUR","quote":"USD","rate":1.1207}
+PASS filtered rate list: 2
+PASS currency list: 165
+PASS direct error envelope: 422

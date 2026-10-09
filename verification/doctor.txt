@@ -1,0 +1,5 @@
+[14:53:35.075] INFO: sdkgen                 doctor-start         
+[14:53:35.195] INFO: sdkgen                 doctor-finding       FORKED (will be reverted by `target add`): model/target/ts.aontu
+[14:53:35.196] INFO: sdkgen                 doctor-end           .sdk has drifted: 1 forked, 0 edited, 0 stale, 0 missing, 0 outdated
+
+.sdk has drifted from the scaffold: 1 forked, 0 edited, 0 stale, 0 missing. Run `voxgig-sdkgen target add <lang>` to resync, and move any project decision into .sdk/model/.

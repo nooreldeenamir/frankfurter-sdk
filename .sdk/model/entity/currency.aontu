@@ -1,0 +1,81 @@
+# Entity: currency
+
+main: kit: entity: currency: {
+
+  alias: field: {}
+
+  fields: {
+    end_date: {
+      fo: "date"
+      h: "End Date"
+      n: "end_date"
+      r: false
+      t: "`$STRING`"
+    }
+    iso_code: {
+      h: "Iso Code"
+      n: "iso_code"
+      r: true
+      t: "`$STRING`"
+    }
+    iso_numeric: {
+      h: "Iso Numeric"
+      n: "iso_numeric"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    start_date: {
+      fo: "date"
+      h: "Start Date"
+      n: "start_date"
+      r: false
+      t: "`$STRING`"
+    }
+    symbol: {
+      h: "Symbol"
+      n: "symbol"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "currency"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /currencies"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/currencies"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "currencies"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,8 @@
+
+> build-frankfurter-sdk@0.0.1 generate
+> node build/docgen.js && tsc --build src && node build/model-relative.cjs model/sdk.aontu test/test.aontu
+
+[14:51:43.991] WARN: model/sdkgen           flow-step-unreachable flow step(s) BasicRateFlow#1 (load) switched off: the call they make reaches no route of the operation. Every route needs an action, or a path parameter the step does not give.
+[14:51:44.112] WARN: model/sdkgen           generate-copies      target ts: 1 file(s) in .sdk differ from what @voxgig/sdkgen 4.34.3 installs: changed in this project, or copied before sdkgen recorded its copies. `npx voxgig-sdkgen doctor` lists them; `npx voxgig-sdkgen package update @voxgig/sdkgen --no-fetch` refreshes them, and refuses before it overwrites a local edit.
+Model build passed: model/sdk.aontu
+Model build passed: test/test.aontu

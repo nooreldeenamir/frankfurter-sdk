@@ -1,0 +1,179 @@
+# Entity: rate
+
+main: kit: entity: rate: {
+
+  alias: field: {}
+
+  fields: {
+    base: {
+      h: "Base"
+      n: "base"
+      r: true
+      t: "`$STRING`"
+    }
+    date: {
+      fo: "date"
+      h: "Date"
+      n: "date"
+      r: true
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    quote: {
+      h: "Quote"
+      n: "quote"
+      r: true
+      t: "`$STRING`"
+    }
+    rate: {
+      h: "Rate"
+      n: "rate"
+      r: true
+      t: "`$NUMBER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    from: {
+      base: "base"
+      quote: "quote"
+    }
+    name: "id"
+    parts: [
+      "base"
+      "quote"
+    ]
+    sep: "/"
+  }
+
+  name: "rate"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /rates"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "base"
+                or: "base"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "quote"
+                or: "quotes"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/rates"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "rates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /rate/{base}/{quote}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "base"
+                or: "base"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "quote"
+                or: "quote"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/rate/{base}/{quote}"
+          q: {
+            exist: [
+              "base"
+              "quote"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "rate"
+            }
+            {
+              var: "base"
+            }
+            {
+              var: "quote"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

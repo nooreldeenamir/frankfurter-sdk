@@ -1,0 +1,15 @@
+{
+  "files": [
+    "SUMMARY.md"
+  ],
+  "config": ".sdk/doc/qa/vale.ini",
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Currencies",
+      "Rate",
+      "Rates",
+      "Unofficial, independently authored subset based on https://frankfurter.dev/ documentation checked 2026-10-09. No authentication required."
+    ]
+  }
+}

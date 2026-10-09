@@ -1,0 +1,49 @@
+{
+  "existing": {
+    "currency": {
+      "CURRENCY00": {
+        "end_date": "s3c",
+        "iso_code": "s3d",
+        "iso_numeric": "s3e",
+        "name": "s3f",
+        "start_date": "s40",
+        "symbol": "s41"
+      },
+      "CURRENCY01": {
+        "end_date": "s78",
+        "iso_code": "s79",
+        "iso_numeric": "s7a",
+        "name": "s7b",
+        "start_date": "s7c",
+        "symbol": "s7d"
+      },
+      "CURRENCY02": {
+        "end_date": "sb4",
+        "iso_code": "sb5",
+        "iso_numeric": "sb6",
+        "name": "sb7",
+        "start_date": "sb8",
+        "symbol": "sb9"
+      }
+    }
+  },
+  "new": {
+    "currency": {
+      "currency_ref01": {
+        "end_date": "sf0",
+        "iso_code": "sf1",
+        "iso_numeric": "sf2",
+        "name": "sf3",
+        "start_date": "sf4",
+        "symbol": "sf5"
+      }
+    }
+  },
+  "requests": {
+    "GET /currencies": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

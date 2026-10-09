@@ -1,0 +1,21 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      auth: false
+      description: "Unofficial, independently authored subset based on https://frankfurter.dev/ documentation checked 2026-10-09. No authentication required."
+      servers: [
+        {
+          url: "https://api.frankfurter.dev/v2"
+        }
+      ]
+      summary: "Unofficial, independently authored subset based on https://frankfurter.dev/ documentation checked 2026-10-09."
+      title: "Frankfurter v2 — selected read endpoints"
+      version: "0.1.0"
+      website: "https://frankfurter.dev"
+    }
+  }
+}
+

@@ -1,0 +1,55 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Frankfurter v2 — selected read endpoints",
+    "version": "0.1.0",
+    "description": "Unofficial, independently authored subset based on https://frankfurter.dev/ documentation checked 2026-10-09. No authentication required."
+  },
+  "servers": [{"url": "https://api.frankfurter.dev/v2"}],
+  "paths": {
+    "/rates": {
+      "get": {
+        "operationId": "listRates",
+        "tags": ["Rate"],
+        "summary": "List latest or historical reference rates",
+        "parameters": [
+          {"name": "base", "in": "query", "schema": {"type": "string"}},
+          {"name": "quotes", "in": "query", "description": "Comma-separated currency codes", "schema": {"type": "string"}},
+          {"name": "date", "in": "query", "schema": {"type": "string", "format": "date"}}
+        ],
+        "responses": {"200": {"description": "Rates", "content": {"application/json": {"schema": {"type": "array", "items": {"$ref": "#/components/schemas/Rate"}}}}}}
+      }
+    },
+    "/rate/{base}/{quote}": {
+      "get": {
+        "operationId": "loadRate",
+        "tags": ["Rate"],
+        "summary": "Get one currency pair",
+        "parameters": [
+          {"name": "base", "in": "path", "required": true, "schema": {"type": "string"}},
+          {"name": "quote", "in": "path", "required": true, "schema": {"type": "string"}},
+          {"name": "date", "in": "query", "schema": {"type": "string", "format": "date"}}
+        ],
+        "responses": {"200": {"description": "Rate", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Rate"}}}}}
+      }
+    },
+    "/currencies": {
+      "get": {
+        "operationId": "listCurrencies",
+        "tags": ["Currency"],
+        "summary": "List available currencies",
+        "responses": {"200": {"description": "Currencies", "content": {"application/json": {"schema": {"type": "array", "items": {"$ref": "#/components/schemas/Currency"}}}}}}
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Rate": {"type": "object", "required": ["date", "base", "quote", "rate"], "properties": {
+        "date": {"type": "string", "format": "date"}, "base": {"type": "string"}, "quote": {"type": "string"}, "rate": {"type": "number"}
+      }},
+      "Currency": {"type": "object", "required": ["iso_code", "name"], "additionalProperties": true, "properties": {
+        "iso_code": {"type": "string"}, "iso_numeric": {"type": "string", "nullable": true}, "name": {"type": "string"}, "symbol": {"type": "string", "nullable": true}, "start_date": {"type": "string", "format": "date", "nullable": true}, "end_date": {"type": "string", "format": "date", "nullable": true}
+      }}
+    }
+  }
+}
