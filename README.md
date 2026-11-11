@@ -1,5 +1,11 @@
 # Frankfurter SDK
 
+Project-specific checks and maintenance: [contributing](CONTRIBUTING.md),
+[offline runnable example](examples/offline-rates.cjs),
+[consumer contract tests](verification/consumer-contract.test.cjs),
+[known issues](docs/known-issues.md) and [verification record](docs/maintenance-2026-11-11.md).
+The generated language client is under `ts/`; this repository does not currently ship other language targets.
+
 Unofficial Frankfurter v2 SDK client, generated from the OpenAPI spec.
 
 TypeScript client generated with Voxgig for three Frankfurter JSON read endpoints.

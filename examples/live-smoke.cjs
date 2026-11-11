@@ -2,7 +2,10 @@ const assert = require('node:assert/strict')
 const { FrankfurterSDK } = require('../ts/dist/FrankfurterSDK.js')
 
 async function main() {
-  const client = new FrankfurterSDK()
+  // Keep each public read bounded; certificate verification remains enabled.
+  const client = new FrankfurterSDK({ system: {
+    fetch: (url, init) => fetch(url, { ...init, signal: AbortSignal.timeout(15000) }),
+  } })
   const pair = (await client.Rate().load({ base: 'EUR', quote: 'USD' })).data()
   assert.equal(pair.base, 'EUR')
   assert.equal(pair.quote, 'USD')

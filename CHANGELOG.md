@@ -6,8 +6,19 @@ This project follows [Keep a Changelog](https://keepachangelog.com) and
 
 ## [Unreleased]
 
+- Added project-specific consumer contract checks for query mapping, historical
+  pair requests, missing parameters, nullable runtime data, HTTP errors,
+  malformed JSON and cancellation.
+- Added an offline runnable example using synthetic rates, plus a bounded live
+  smoke check. Live requests remain separate from pull-request CI.
+- Added Linux and Windows consumer checks using Node 24 and the committed npm
+  lockfile. Local Windows results do not imply either hosted job has passed.
+- Documented contribution steps and a minimal strict TypeScript reproduction of
+  the unresolved nullable Currency type mismatch.
+- Corrected the initial changelog's language-target claim: only TypeScript was
+  generated for this project.
+
 ## [0.0.1]
 
-- Initial generated release of the Frankfurter SDK (TypeScript, Python, PHP, Go,
-  Ruby, and Lua, plus CLI and MCP surfaces), generated from the upstream
-  OpenAPI specification by @voxgig/sdkgen.
+- Initial TypeScript Frankfurter SDK, generated with @voxgig/sdkgen from an
+  independently authored three-endpoint OpenAPI subset. No npm release was made.
