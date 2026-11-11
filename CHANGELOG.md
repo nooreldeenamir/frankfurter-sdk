@@ -6,6 +6,9 @@ This project follows [Keep a Changelog](https://keepachangelog.com) and
 
 ## [Unreleased]
 
+- Fixed generated TypeScript documentation checks rejecting CRLF Markdown on
+  Windows. Changed both generator components and regenerated the tests; added
+  LF/CRLF fixtures and a real-document CRLF check in both hosted OS jobs.
 - Added project-specific consumer contract checks for query mapping, historical
   pair requests, missing parameters, nullable runtime data, HTTP errors,
   malformed JSON and cancellation.

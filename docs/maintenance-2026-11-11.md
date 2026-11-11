@@ -11,7 +11,8 @@ the checks used the installed Node 24 executable instead.
 
 | Check | Result |
 | --- | --- |
-| `npm test --prefix ts` | 228 tests: 218 pass, 10 skip, 0 fail |
+| `npm test --prefix ts` | 230 tests: 220 pass, 10 skip, 0 fail, after the CRLF fix below |
+| `node verification/check-crlf-docs.cjs` | 9 documentation checks pass after all three real docs are converted to CRLF |
 | `node --test verification/consumer-contract.test.cjs` | 9 pass, 0 fail, 1 explicit TODO |
 | `node examples/offline-rates.cjs` | Passed; no HTTP request, two synthetic records |
 | Strict compile of `verification/nullable-contract.ts` | Expected failure: four TS2322 errors for null fields |
@@ -34,6 +35,25 @@ Windows. Hosted runs must be checked on GitHub after publication; local success
 alone is not evidence of hosted CI success. No package publication, upstream
 issue submission, external contribution acceptance or new speaker event is
 implied by this update.
+
+## First hosted run and Windows fix
+
+The [first hosted consumer run](https://github.com/nooreldeenamir/frankfurter-sdk/actions/runs/43080788298)
+passed on Linux but failed seven documentation checks on Windows. Both generated
+Markdown extractors assumed an LF immediately after the TypeScript fence;
+Windows Git checkout produced CRLF, so they reported that no examples existed.
+The examples had not disappeared and those failures were not skipped.
+
+The fix changes the two generator components under `.sdk/src/cmp/ts/` to
+normalize CRLF before extraction, then regenerates the corresponding tests.
+Two new fixture checks cover both LF and CRLF. A separate real-document check
+converts all three documentation files to CRLF and runs the actual snippet
+type-check/execution gate, restoring the original files afterward. Both OS jobs
+now run that regression. The generator therefore has two additional deliberate
+local component customizations; these are not upstream changes.
+
+These fixes were locally verified on Windows. A subsequent hosted run must
+confirm both jobs; the failed first run remains part of the verification record.
 
 The optional live check now applies a 15-second timeout to each fetch. Node's
 system CA option was used for this Windows environment; TLS verification was

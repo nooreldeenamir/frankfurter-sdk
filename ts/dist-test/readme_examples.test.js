@@ -88,6 +88,8 @@ const DOCS = [
 ];
 // Pull out the body of every ```ts fenced code block.
 function extractTsBlocks(md) {
+    // Git can check Markdown out as CRLF on Windows.
+    md = md.replace(/\r\n/g, '\n');
     const blocks = [];
     const re = /```ts\n([\s\S]*?)```/g;
     let m;
@@ -321,6 +323,16 @@ function indentBlock(code) {
     return code.replace(/^/gm, '    ').replace(/\s+$/, '');
 }
 (0, node_test_1.describe)('README examples', () => {
+    (0, node_test_1.it)('extracts all TypeScript blocks from LF and CRLF Markdown', () => {
+        const lf = String.fromCharCode(10);
+        const crlf = String.fromCharCode(13) + lf;
+        const fence = String.fromCharCode(96).repeat(3);
+        const lines = [fence + 'ts', 'const a = 1', fence,
+            'Some explanation', fence + 'ts', 'const b = 2', fence];
+        const expected = ['const a = 1' + lf, 'const b = 2' + lf];
+        node_assert_1.default.deepStrictEqual(extractTsBlocks(lines.join(lf)), expected);
+        node_assert_1.default.deepStrictEqual(extractTsBlocks(lines.join(crlf)), expected);
+    });
     for (const doc of DOCS) {
         (0, node_test_1.it)(doc.label + ' — every example type-checks or is a known illustration', () => {
             // A target without this doc has nothing to check.

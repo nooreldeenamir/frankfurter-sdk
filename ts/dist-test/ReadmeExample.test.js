@@ -43,6 +43,8 @@ const Fs = __importStar(require("node:fs"));
 const Path = __importStar(require("node:path"));
 const __1 = require("..");
 function findFirstTsBlock(md, sectionHeading) {
+    // Git can check Markdown out as CRLF on Windows.
+    md = md.replace(/\r\n/g, '\n');
     const escapedHeading = sectionHeading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const re = new RegExp('##\\s+' + escapedHeading + '[\\s\\S]*?```ts\\n([\\s\\S]*?)```');
     const m = md.match(re);
@@ -56,6 +58,15 @@ function transformForTestMode(code, name) {
     return out;
 }
 (0, node_test_1.describe)('README example', () => {
+    (0, node_test_1.it)('extracts the same quickstart from LF and CRLF Markdown', () => {
+        const lf = String.fromCharCode(10);
+        const crlf = String.fromCharCode(13) + lf;
+        const fence = String.fromCharCode(96).repeat(3);
+        const lines = ['## Quickstart', fence + 'ts', 'const value = 1', fence];
+        const expected = 'const value = 1' + lf;
+        node_assert_1.default.strictEqual(findFirstTsBlock(lines.join(lf), 'Quickstart'), expected);
+        node_assert_1.default.strictEqual(findFirstTsBlock(lines.join(crlf), 'Quickstart'), expected);
+    });
     (0, node_test_1.it)('lead-language quickstart runs in test mode', async () => {
         const readmePath = Path.join(__dirname, '..', '..', 'README.md');
         const md = Fs.readFileSync(readmePath, 'utf8');

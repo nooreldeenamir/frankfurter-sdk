@@ -11,6 +11,7 @@ Use Node 24 and the committed npm lockfile. From the repository root:
 ```sh
 npm ci --prefix ts
 npm test --prefix ts
+node verification/check-crlf-docs.cjs
 node --test verification/consumer-contract.test.cjs
 node examples/offline-rates.cjs
 ```
@@ -20,6 +21,10 @@ injects a transport and checks concrete request paths, query aliases, payloads,
 HTTP failures, cancellation and malformed JSON. Neither command needs credentials
 or a working Frankfurter API. One explicitly marked TODO records an unresolved
 static type issue; it is not a passing check.
+
+The CRLF check temporarily rewrites the three documentation files to Windows
+line endings, runs the real generated documentation gate, then restores their
+original bytes. Run it sequentially, not alongside a documentation editor.
 
 The optional `node examples/live-smoke.cjs` makes four read-only requests to the
 public API. Live values change; it checks response shape rather than a fixed

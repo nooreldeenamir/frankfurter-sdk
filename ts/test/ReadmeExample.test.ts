@@ -9,6 +9,8 @@ import { FrankfurterSDK } from '..'
 
 
 function findFirstTsBlock(md: string, sectionHeading: string): string | null {
+  // Git can check Markdown out as CRLF on Windows.
+  md = md.replace(/\r\n/g, '\n')
   const escapedHeading = sectionHeading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   const re = new RegExp('##\\s+' + escapedHeading + '[\\s\\S]*?```ts\\n([\\s\\S]*?)```')
   const m = md.match(re)
@@ -26,6 +28,16 @@ function transformForTestMode(code: string, name: string): string {
 
 
 describe('README example', () => {
+  it('extracts the same quickstart from LF and CRLF Markdown', () => {
+    const lf = String.fromCharCode(10)
+    const crlf = String.fromCharCode(13) + lf
+    const fence = String.fromCharCode(96).repeat(3)
+    const lines = ['## Quickstart', fence + 'ts', 'const value = 1', fence]
+    const expected = 'const value = 1' + lf
+    assert.strictEqual(findFirstTsBlock(lines.join(lf), 'Quickstart'), expected)
+    assert.strictEqual(findFirstTsBlock(lines.join(crlf), 'Quickstart'), expected)
+  })
+
   it('lead-language quickstart runs in test mode', async () => {
     const readmePath = Path.join(__dirname, '..', '..', 'README.md')
     const md = Fs.readFileSync(readmePath, 'utf8')

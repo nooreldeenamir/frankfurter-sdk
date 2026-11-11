@@ -27,5 +27,6 @@ jobs:
           cache-dependency-path: ts/package-lock.json
       - run: npm ci --prefix ts --no-audit --no-fund
       - run: npm test --prefix ts
+      - run: node verification/check-crlf-docs.cjs
       - run: node --test verification/consumer-contract.test.cjs
       - run: node examples/offline-rates.cjs
